@@ -14,10 +14,12 @@ use tokio::sync::RwLock;
 pub mod proof_of_stake;
 pub mod validator;
 pub mod slashing;
+pub mod unicoin_consensus;
 
 pub use proof_of_stake::ProofOfStake;
 pub use validator::{Validator, ValidatorSet};
 pub use slashing::{SlashingCondition, SlashingPenalty};
+pub use unicoin_consensus::{UniConsensus, ValidatorInfo, ConsensusState, ConsensusResult, GeographicLocation, ValidatorSpecialization};
 
 /// Consensus engine for Unicoin
 pub struct ConsensusEngine {

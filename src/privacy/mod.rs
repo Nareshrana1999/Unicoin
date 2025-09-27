@@ -7,8 +7,10 @@ use crate::{Result, UnicoinError};
 use serde::{Deserialize, Serialize};
 
 pub mod zk_proofs;
+pub mod advanced_privacy;
 
 pub use zk_proofs::{ZKTransactionProof, ZKProofSystem, ZKProofGenerator, TrustedSetup, CompiledCircuit};
+pub use advanced_privacy::{PrivacyManager, RingSignature, StealthAddress, ConfidentialTransaction, ZeroKnowledgeProof as AdvancedZKProof, PrivacyLevel};
 
 /// Zero-knowledge proof for anonymous transactions
 #[derive(Debug, Clone, Serialize, Deserialize)]

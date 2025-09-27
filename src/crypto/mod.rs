@@ -16,11 +16,13 @@ pub mod hash;
 pub mod keys;
 pub mod signatures;
 pub mod quantum_resistant;
+pub mod unicoin_original;
 
 pub use hash::Hash;
 pub use keys::{PublicKey, PrivateKey};
 pub use signatures::Signature;
 pub use quantum_resistant::{PostQuantumSignature, PostQuantumKeyPair};
+pub use unicoin_original::{UniHash, UniSig, UniEnc, UniCommit, SecurityLevel, UniPrivateKey, UniPublicKey, UniSignature, UniCommitment};
 
 /// Cryptographic algorithm types
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
