@@ -9,12 +9,28 @@ use unicoin::{
     consensus::ConsensusEngine,
     config::{UnicoinConfig, ConfigBuilder},
     api::ApiServer,
+    cli::CliApp,
     Result,
 };
 use tracing::{info, error};
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    // Check if we should run in CLI mode
+    let args: Vec<String> = std::env::args().collect();
+    
+    // If CLI arguments are provided, run CLI mode
+    if args.len() > 1 && args[1] != "start" {
+        let cli_app = CliApp::new();
+        return cli_app.run().await;
+    }
+
+    // Otherwise, run in normal node mode
+    run_node().await
+}
+
+/// Run the Unicoin node
+async fn run_node() -> Result<()> {
     // Load configuration
     let config = load_configuration().await?;
     

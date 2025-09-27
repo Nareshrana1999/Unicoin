@@ -24,6 +24,7 @@ pub mod core;
 pub mod utils;
 pub mod config;
 pub mod api;
+pub mod cli;
 
 pub use blockchain::{Block, BlockHeader, Transaction, Blockchain};
 pub use crypto::{Hash, PublicKey, PrivateKey, Signature};

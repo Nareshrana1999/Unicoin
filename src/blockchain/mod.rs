@@ -239,8 +239,21 @@ impl Blockchain {
 
     /// Get the genesis block
     fn get_genesis_block(&self) -> Result<Option<Block>> {
-        // For now, return None - genesis block creation will be implemented separately
-        Ok(None)
+        // Try to load genesis block from database
+        if let Some(genesis_bytes) = self.db.get(b"genesis_block")? {
+            let genesis_block: Block = bincode::deserialize(&genesis_bytes)?;
+            Ok(Some(genesis_block))
+        } else {
+            // Create and store genesis block if it doesn't exist
+            let genesis_config = genesis::GenesisCreator::create_mainnet_genesis();
+            let genesis_block = genesis::GenesisCreator::create_genesis_block(genesis_config)?;
+            
+            // Store genesis block
+            let genesis_bytes = bincode::serialize(&genesis_block)?;
+            self.db.insert(b"genesis_block", genesis_bytes)?;
+            
+            Ok(Some(genesis_block))
+        }
     }
 
     /// Get blockchain state
