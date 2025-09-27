@@ -1,0 +1,55 @@
+{
+  "name": "unicoin",
+  "version": "0.1.0",
+  "description": "Universal Coin - The Ultimate Secure Decentralized Cryptocurrency",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:core && npm run build:apps",
+    "build:core": "cargo build --release",
+    "build:apps": "cd apps && npm run build",
+    "test": "npm run test:core && npm run test:apps",
+    "test:core": "cargo test",
+    "test:apps": "cd apps && npm test",
+    "start": "npm run start:node",
+    "start:node": "./target/release/unicoin-node",
+    "start:wallet": "cd apps/wallet && npm start",
+    "start:explorer": "cd apps/explorer && npm start",
+    "dev": "npm run dev:node",
+    "dev:node": "cargo run",
+    "bench": "cargo bench",
+    "audit": "cargo audit",
+    "lint": "cargo clippy",
+    "format": "cargo fmt",
+    "clean": "cargo clean && cd apps && npm run clean",
+    "docker:build": "docker build -t unicoin .",
+    "docker:run": "docker run -p 30303:30303 unicoin"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "blockchain",
+    "defi",
+    "privacy",
+    "security",
+    "proof-of-stake",
+    "smart-contracts"
+  ],
+  "author": "Unicoin Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unicoin/unicoin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unicoin/unicoin/issues"
+  },
+  "homepage": "https://unicoin.org",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}

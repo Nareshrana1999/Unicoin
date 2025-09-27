@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  unicoin-node:
+    build: .
+    container_name: unicoin-node
+    ports:
+      - "30303:30303"  # P2P port
+      - "8545:8545"    # HTTP RPC
+      - "8546:8546"    # WebSocket RPC
+    volumes:
+      - unicoin-data:/app/data
+      - ./config:/app/config:ro
+    environment:
+      - RUST_LOG=info
+      - UNICOIN_NETWORK=mainnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8545/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  unicoin-wallet:
+    build:
+      context: .
+      dockerfile: Dockerfile.wallet
+    container_name: unicoin-wallet
+    ports:
+      - "3000:3000"
+    depends_on:
+      - unicoin-node
+    environment:
+      - REACT_APP_RPC_URL=http://unicoin-node:8545
+      - REACT_APP_WS_URL=ws://unicoin-node:8546
+    restart: unless-stopped
+
+  unicoin-explorer:
+    build:
+      context: .
+      dockerfile: Dockerfile.explorer
+    container_name: unicoin-explorer
+    ports:
+      - "3001:3001"
+    depends_on:
+      - unicoin-node
+    environment:
+      - REACT_APP_RPC_URL=http://unicoin-node:8545
+      - REACT_APP_WS_URL=ws://unicoin-node:8546
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: unicoin-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: unicoin-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=unicoin
+      - POSTGRES_USER=unicoin
+      - POSTGRES_PASSWORD=unicoin_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: unicoin-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - unicoin-wallet
+      - unicoin-explorer
+    restart: unless-stopped
+
+volumes:
+  unicoin-data:
+    driver: local
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local
+
+networks:
+  default:
+    name: unicoin-network
