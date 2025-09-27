@@ -17,6 +17,10 @@ pub mod network;
 pub mod smart_contracts;
 pub mod governance;
 pub mod bridges;
+pub mod defi;
+pub mod ai;
+pub mod nft;
+pub mod core;
 pub mod utils;
 
 pub use blockchain::{Block, BlockHeader, Transaction, Blockchain};
