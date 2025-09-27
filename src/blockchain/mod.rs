@@ -17,13 +17,25 @@ pub mod state;
 pub mod genesis;
 pub mod mempool;
 pub mod merkle_tree;
+pub mod utxo;
+pub mod script;
+pub mod segwit;
+pub mod lightning;
+pub mod difficulty;
+pub mod block_reward;
 
-pub use block::{Block, BlockHeader};
-pub use transaction::{Transaction, TransactionType, TransactionInput, TransactionOutput};
+pub use block::{Block, BlockHeader, BlockTemplate};
+pub use transaction::{Transaction, TransactionType, TransactionInput, TransactionOutput, CoinbaseTransaction};
 pub use state::BlockchainState;
 pub use genesis::{GenesisConfig, GenesisDistribution, GenesisCreator};
 pub use mempool::{Mempool, MempoolTransaction, MempoolConfig, TransactionPriority};
 pub use merkle_tree::{MerkleTree, MerkleProof, SparseMerkleTree};
+pub use utxo::{UTXO, UTXOSet, UTXOProvider};
+pub use script::{Script, ScriptOp, ScriptEngine, P2PKH, P2SH, P2WPKH, P2WSH};
+pub use segwit::{SegWitTransaction, Witness, SegWitValidator};
+pub use lightning::{LightningNetwork, PaymentChannel, LightningNode, HTLC};
+pub use difficulty::{DifficultyAdjustment, Target, MiningDifficulty};
+pub use block_reward::{BlockReward, HalvingSchedule, InflationControl};
 
 /// Main blockchain structure
 #[derive(Debug, Clone)]

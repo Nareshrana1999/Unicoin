@@ -3,6 +3,10 @@
 //! This module provides smart contract functionality for Unicoin including
 //! contract deployment, execution, and the virtual machine.
 
+pub mod evm;
+pub mod gas;
+pub mod accounts;
+
 use crate::{Result, UnicoinError};
 use serde::{Deserialize, Serialize};
 
