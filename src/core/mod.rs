@@ -7,11 +7,13 @@ pub mod performance;
 pub mod integration;
 pub mod monitoring;
 pub mod orchestration;
+pub mod node;
 
 pub use performance::PerformanceOptimizer;
 pub use integration::UnicoinCore;
 pub use monitoring::SystemMonitor;
 pub use orchestration::OrchestrationEngine;
+pub use node::{UnicoinNode, NodeStatus, NodeStats};
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

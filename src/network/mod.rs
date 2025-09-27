@@ -24,11 +24,13 @@ pub mod protocol;
 pub mod peer;
 pub mod discovery;
 pub mod routing;
+pub mod p2p;
 
 pub use protocol::{NetworkProtocol, ProtocolMessage};
 pub use peer::{Peer, PeerInfo, PeerManager};
 pub use discovery::PeerDiscovery;
 pub use routing::MessageRouting;
+pub use p2p::{P2PNetwork, NetworkMessage, PeerInfo as P2PPeerInfo, PeerStatus, NetworkStats, HandshakeMessage, GetBlocksMessage, PingMessage, PongMessage, VersionMessage};
 
 /// Network node for Unicoin
 pub struct NetworkNode {

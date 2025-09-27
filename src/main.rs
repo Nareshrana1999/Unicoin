@@ -4,11 +4,8 @@
 //! validates transactions, and maintains the blockchain.
 
 use unicoin::{
-    blockchain::Blockchain,
-    network::NetworkNode,
-    consensus::ConsensusEngine,
-    config::{UnicoinConfig, ConfigBuilder},
-    api::ApiServer,
+    core::UnicoinNode,
+    config::UnicoinConfig,
     cli::CliApp,
     Result,
 };
@@ -41,33 +38,17 @@ async fn run_node() -> Result<()> {
 
     info!("Starting Unicoin Node v{}", unicoin::VERSION);
 
-    // Initialize the blockchain
-    let blockchain = Blockchain::new()?;
-    info!("Blockchain initialized");
-
-    // Initialize consensus engine
-    let consensus = ConsensusEngine::new(blockchain.clone())?;
-    info!("Consensus engine initialized");
-
-    // Initialize network node
-    let network = NetworkNode::new(consensus.clone())?;
-    info!("Network node initialized");
-
-    // Initialize API server
-    let api_server = ApiServer::new(config.api.clone());
-    info!("API server initialized");
-
+    // Create and start the node
+    let node = UnicoinNode::new(config).await?;
+    
     // Start the node
-    let node = UnicoinNode {
-        blockchain,
-        consensus,
-        network,
-        api_server,
-        config,
-    };
+    if let Err(e) = node.start().await {
+        error!("Failed to start node: {}", e);
+        std::process::exit(1);
+    }
 
-    // Run the node
-    if let Err(e) = node.run().await {
+    // Wait for shutdown signal
+    if let Err(e) = node.wait_for_shutdown().await {
         error!("Node error: {}", e);
         std::process::exit(1);
     }
@@ -95,47 +76,4 @@ async fn load_configuration() -> Result<UnicoinConfig> {
     }
 
     Ok(config)
-}
-
-/// Main Unicoin node structure
-pub struct UnicoinNode {
-    blockchain: Blockchain,
-    consensus: ConsensusEngine,
-    network: NetworkNode,
-    api_server: ApiServer,
-    config: UnicoinConfig,
-}
-
-impl UnicoinNode {
-    /// Run the Unicoin node
-    pub async fn run(mut self) -> Result<()> {
-        info!("Unicoin node is running...");
-
-        // Start API server
-        let api_handle = tokio::spawn(async move {
-            self.api_server.start().await
-        });
-
-        // Start network services
-        let network_handle = tokio::spawn(async move {
-            self.network.start().await
-        });
-
-        // Start consensus services
-        let consensus_handle = tokio::spawn(async move {
-            self.consensus.start().await
-        });
-
-        // Wait for shutdown signal
-        tokio::signal::ctrl_c().await?;
-        info!("Shutdown signal received");
-
-        // Graceful shutdown
-        api_handle.abort();
-        network_handle.abort();
-        consensus_handle.abort();
-
-        info!("Unicoin node stopped");
-        Ok(())
-    }
 }
