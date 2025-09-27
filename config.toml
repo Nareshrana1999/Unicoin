@@ -1,0 +1,206 @@
+# Unicoin Configuration File
+# This is a sample configuration file for Unicoin
+
+[network]
+listen_address = "0.0.0.0"
+listen_port = 30303
+max_peers = 100
+enable_discovery = true
+enable_mdns = true
+enable_dht = true
+connection_timeout = 30
+read_timeout = 60
+write_timeout = 60
+keep_alive_interval = 30
+max_message_size = 1048576
+enable_encryption = true
+enable_compression = true
+network_id = 1
+enable_nat_traversal = true
+enable_upnp = true
+enable_hole_punching = true
+
+[blockchain]
+block_time = 10
+max_block_size = 4194304
+max_transaction_size = 1048576
+max_transactions_per_block = 10000
+difficulty_adjustment = true
+difficulty_adjustment_interval = 2016
+min_difficulty = 1
+max_difficulty = 18446744073709551615
+block_reward = 5000000000
+halving_interval = 210000
+max_supply = 2100000000000000000
+enable_utxo = true
+enable_segwit = true
+enable_lightning = true
+fee_rate = 10
+min_fee = 1000
+enable_rbf = true
+max_fee_bump = 100000000
+enable_cpfp = true
+mempool_size_limit = 100000
+transaction_expiry = 3600
+enable_priority = true
+
+[consensus]
+algorithm = "UniConsensus"
+min_validators = 21
+max_validators = 100
+min_stake = 100000000000000000
+max_stake = 10000000000000000000
+enable_slashing = true
+double_sign_slashing = 0.05
+downtime_slashing = 0.01
+unbonding_period = 60480
+finality_threshold = 2
+enable_geographic_distribution = true
+min_validators_per_region = 3
+enable_specialization = true
+consensus_timeout = 30
+proposal_timeout = 10
+vote_timeout = 15
+enable_fast_finality = true
+fast_finality_threshold = 15
+enable_bft = true
+bft_threshold = 0.67
+
+[features]
+enable_ai = true
+enable_defi = true
+enable_nft = true
+enable_privacy = true
+enable_smart_contracts = true
+enable_bridges = true
+enable_governance = true
+enable_staking = true
+enable_yield_farming = true
+enable_flash_loans = true
+enable_derivatives = true
+enable_lending = true
+enable_dex = true
+enable_liquidity_pools = true
+enable_nft_marketplace = true
+enable_nft_auctions = true
+enable_nft_royalties = true
+enable_zk_proofs = true
+enable_ring_signatures = true
+enable_stealth_addresses = true
+enable_confidential_transactions = true
+enable_ai_prediction = true
+enable_ai_optimization = true
+enable_ai_risk_management = true
+enable_ai_trading_bots = true
+enable_ai_governance = true
+
+[performance]
+max_tps = 10000
+enable_parallel_processing = true
+worker_threads = 8
+cache_size_mb = 512
+enable_transaction_batching = true
+transaction_batch_size = 1000
+enable_block_prevalidation = true
+enable_transaction_prevalidation = true
+enable_memory_pooling = true
+memory_pool_size_mb = 256
+enable_connection_pooling = true
+connection_pool_size = 100
+enable_db_optimization = true
+db_cache_size_mb = 256
+enable_compression = true
+compression_level = 6
+enable_async_io = true
+io_buffer_size_kb = 64
+enable_prefetching = true
+prefetch_size_kb = 32
+enable_jit = true
+enable_cpu_optimization = true
+enable_memory_optimization = true
+
+[security]
+enable_encryption = true
+encryption_algorithm = "UniEnc"
+key_size = 256
+enable_authentication = true
+authentication_method = "PublicKey"
+session_timeout = 3600
+max_login_attempts = 5
+lockout_duration = 300
+enable_rate_limiting = true
+rate_limit_per_minute = 1000
+rate_limit_burst = 100
+enable_ip_whitelist = false
+whitelisted_ips = []
+enable_ip_blacklist = true
+blacklisted_ips = ["127.0.0.1", "::1"]
+enable_audit_logging = true
+audit_log_retention_days = 90
+enable_intrusion_detection = true
+intrusion_detection_sensitivity = 5
+enable_malware_scanning = true
+enable_ddos_protection = true
+ddos_protection_threshold = 1000
+enable_firewall = true
+firewall_rules = []
+enable_secure_headers = true
+enable_csrf_protection = true
+enable_xss_protection = true
+enable_csp = true
+csp_rules = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https:"
+]
+
+[api]
+enable_rest_api = true
+rest_api_address = "127.0.0.1"
+rest_api_port = 8080
+enable_websocket_api = true
+websocket_api_address = "127.0.0.1"
+websocket_api_port = 8081
+enable_graphql_api = true
+graphql_api_address = "127.0.0.1"
+graphql_api_port = 8082
+api_version = "v1"
+enable_api_docs = true
+api_docs_path = "/docs"
+enable_cors = true
+cors_allowed_origins = ["http://localhost:3000", "http://localhost:3001"]
+enable_api_auth = false
+api_auth_token = null
+enable_api_rate_limiting = true
+api_rate_limit_per_minute = 1000
+enable_api_caching = true
+api_cache_ttl = 300
+enable_api_compression = true
+enable_api_logging = true
+api_log_level = "Info"
+enable_api_metrics = true
+enable_api_health_checks = true
+api_health_check_interval = 30
+
+[logging]
+enable_logging = true
+log_level = "Info"
+enable_console_logging = true
+enable_file_logging = true
+log_file_path = "logs/unicoin.log"
+enable_structured_logging = true
+log_format = "Compact"
+enable_log_rotation = true
+max_log_file_size_mb = 100
+max_log_files = 10
+log_retention_days = 30
+enable_colored_output = true
+enable_timestamps = true
+enable_thread_ids = false
+enable_module_paths = true
+enable_target_filtering = false
+target_filters = []
+enable_performance_logging = true
+enable_security_logging = true
+enable_audit_logging = true

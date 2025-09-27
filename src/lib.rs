@@ -22,6 +22,8 @@ pub mod ai;
 pub mod nft;
 pub mod core;
 pub mod utils;
+pub mod config;
+pub mod api;
 
 pub use blockchain::{Block, BlockHeader, Transaction, Blockchain};
 pub use crypto::{Hash, PublicKey, PrivateKey, Signature};
@@ -82,4 +84,7 @@ pub enum UnicoinError {
     
     #[error("Invalid input: {0}")]
     InvalidInput(String),
+    
+    #[error("Invalid configuration: {0}")]
+    InvalidConfig(String),
 }
