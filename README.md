@@ -403,22 +403,7 @@ Some components use proprietary algorithms (UniHash, UniSig, UniEnc, UniConsensu
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### How to Contribute
-1. **Fork** the repository
-2. **Create** a feature branch
-3. **Make** your changes
-4. **Add** tests for new features
-5. **Submit** a pull request
-
-### Contribution Areas
-- **Core Development**: Blockchain, crypto, consensus
-- **AI Features**: Machine learning, optimization
-- **DeFi Protocols**: DEX, lending, yield farming
-- **NFT Platform**: Marketplace, auctions, standards
-- **Documentation**: Guides, tutorials, API docs
-- **Testing**: Unit tests, integration tests, benchmarks
+We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to contribute to Unicoin.
 
 ## 📞 Support
 
